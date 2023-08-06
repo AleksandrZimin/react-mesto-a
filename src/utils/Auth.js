@@ -1,3 +1,4 @@
+import { checkResponse } from "./utils";
 export const BASE_URL = "https://auth.nomoreparties.co";
 
 export const register = (password, email) => {
@@ -11,12 +12,7 @@ export const register = (password, email) => {
       password,
       email,
     }),
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
+  }).then(checkResponse);
 };
 
 export const login = (password, email) => {
@@ -30,12 +26,7 @@ export const login = (password, email) => {
       password,
       email,
     }),
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
+  }).then(checkResponse);
 };
 
 export const checkToken = (token) => {
@@ -46,10 +37,5 @@ export const checkToken = (token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
+  }).then(checkResponse);
 };
